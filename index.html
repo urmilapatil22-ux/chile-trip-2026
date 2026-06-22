@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chile Trip — April 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; }
+    .page { max-width: 780px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+    .hero { background: #1B3A6B; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; color: #fff; }
+    .hero h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+    .hero p { font-size: 13px; opacity: 0.75; margin-bottom: 1.25rem; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hero-chip { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: rgba(255,255,255,0.15); }
+
+    .tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .tab { padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid #ddd; background: #fff; color: #555; transition: all 0.15s; }
+    .tab.active { background: #1B3A6B; color: #fff; border-color: #1B3A6B; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .card { background: #fff; border: 0.5px solid #e5e5e3; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .card-title { font-size: 14px; font-weight: 500; }
+    .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .badge-blue { background: #E6F1FB; color: #185FA5; }
+    .badge-teal { background: #E1F5EE; color: #0F6E56; }
+    .badge-amber { background: #FAEEDA; color: #854F0B; }
+    .badge-navy { background: #1B3A6B; color: #fff; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+    .meta { font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px; }
+    .meta strong { color: #333; }
+    .divider-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #999; margin: 1.25rem 0 8px; }
+    .tl-note { font-size: 12px; color: #666; margin-top: 6px; line-height: 1.6; }
+
+    .day-card { background: #fff; border: 0.5px solid #e5e5e3; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .day-header { padding: 12px 1.25rem; background: #f9f9f7; border-bottom: 0.5px solid #e5e5e3; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .day-num { width: 28px; height: 28px; border-radius: 50%; background: #1B3A6B; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+    .day-title { font-size: 14px; font-weight: 500; flex: 1; }
+    .day-date { font-size: 12px; color: #888; }
+    .day-body { padding: 1rem 1.25rem; display: none; }
+    .day-body.open { display: block; }
+    .timeline { list-style: none; position: relative; padding-left: 20px; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 1.5px; background: #e5e5e3; }
+    .timeline li { position: relative; margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+    .timeline li::before { content: ''; position: absolute; left: -16px; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: #1B3A6B; border: 1.5px solid #fff; outline: 1.5px solid #1B3A6B; }
+    .tl-time { font-size: 11px; color: #888; display: block; }
+    .tl-label { font-weight: 500; }
+    .region-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; display: block; }
+    .region-patagonia { color: #0F6E56; }
+    .region-atacama { color: #854F0B; }
+    .region-santiago { color: #185FA5; }
+    .region-transit { color: #3C3489; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <h1>🇨🇱 Chile — April 2026</h1>
+    <p>Patagonia · Atacama · Santiago &nbsp;|&nbsp; 14 nights · Vegetarian travel</p>
+    <div class="hero-chips">
+      <span class="hero-chip">✈ 3 flights</span>
+      <span class="hero-chip">🏨 4 stays</span>
+      <span class="hero-chip">🥾 W Trek (5 days)</span>
+      <span class="hero-chip">🔭 Atacama stargazing</span>
+      <span class="hero-chip">🏙 Santiago city</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('flights', this)">✈ Flights</div>
+    <div class="tab" onclick="switchTab('hotels', this)">🏨 Hotels & Stays</div>
+    <div class="tab" onclick="switchTab('activities', this)">🎒 Activities</div>
+    <div class="tab" onclick="switchTab('days', this)">📅 Day by Day</div>
+  </div>
+
+  <!-- FLIGHTS -->
+  <div class="section active" id="flights">
+    <div class="divider-label">International</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Toronto (YYZ) → Santiago (SCL)</div><span class="badge badge-navy">Outbound</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>Early April 2026</strong></span><span class="meta">🛫 <strong>Air Canada / LATAM</strong></span><span class="meta">⏱ ~12–13 hrs</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Santiago (SCL) → Toronto (YYZ)</div><span class="badge badge-navy">Return</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>Late April 2026</strong></span><span class="meta">🛫 <strong>Air Canada / LATAM</strong></span><span class="meta">⏱ ~12–13 hrs</span></div>
+    </div>
+    <div class="divider-label">Domestic — Patagonia leg</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Santiago (SCL) → Punta Arenas (PNT)</div><span class="badge badge-teal">JetSMART</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>Day 1</strong></span><span class="meta">🛫 <strong>JetSMART via Kiwi.com</strong></span><span class="meta">⏱ ~3.5 hrs</span></div>
+      <div class="tl-note">⚠ Corrected route: SCL→PNT (not PUQ). Onward: Nomades shuttle to Puerto Natales (Itinerary #261245)</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Punta Arenas (PNT) → Santiago (SCL)</div><span class="badge badge-teal">JetSMART</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>After W Trek</strong></span><span class="meta">🛫 <strong>JetSMART</strong></span></div>
+    </div>
+    <div class="divider-label">Domestic — Atacama leg</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Santiago (SCL) → Calama (CJC)</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>Mid-trip</strong></span><span class="meta">⏱ ~2 hrs</span></div>
+      <div class="tl-note">Transfer Pampa shuttle: Calama airport → San Pedro de Atacama (~1.5 hrs)</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Calama (CJC) → Santiago (SCL)</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>End of Atacama leg</strong></span></div>
+    </div>
+  </div>
+
+  <!-- HOTELS -->
+  <div class="section" id="hotels">
+    <div class="divider-label">Patagonia</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Hostel 53 Sur — Puerto Natales</div><span class="badge badge-teal">Patagonia base</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>~2 nights</strong> (pre-trek)</span><span class="meta">🏨 Booking.com</span></div>
+      <div class="tl-note">Gateway to Torres del Paine. Leave everyday bag here. Gear rental nearby.</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">W Trek Refugios — Torres del Paine</div><span class="badge badge-teal">5 nights in-park</span></div>
+      <div class="meta-row"><span class="meta">🏕 <strong>Chileno · Los Cuernos · Paine Grande · Grey</strong></span></div>
+      <div class="tl-note">Meals included. Vegetarian options confirmed. Charging available at most refugios.</div>
+    </div>
+    <div class="divider-label">Atacama</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Hostal Campo Base — San Pedro de Atacama</div><span class="badge badge-amber">Atacama base</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>~3 nights</strong></span><span class="meta">🏨 Booking.com</span></div>
+      <div class="tl-note">Cash-preferred destination. Carry USD. Withdraw CLP at Calama ATM before transfer.</div>
+    </div>
+    <div class="divider-label">Santiago</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Hotel Merced / Park Hotel — Santiago</div><span class="badge badge-blue">Santiago</span></div>
+      <div class="meta-row"><span class="meta">📅 <strong>~2–3 nights</strong></span><span class="meta">🏨 Booking.com</span><span class="meta">💳 Card-friendly</span></div>
+      <div class="tl-note">Uber works well throughout Santiago. Metro is excellent and safe.</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="section" id="activities">
+    <div class="divider-label">Patagonia — Torres del Paine</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">W Trek — Full 5-day circuit</div><span class="badge badge-teal">Highlight</span></div>
+      <div class="meta-row"><span class="meta">🥾 <strong>~70 km</strong></span><span class="meta">📅 <strong>5 days / 4 nights</strong></span><span class="meta">💪 Strenuous</span></div>
+      <div class="tl-note">Day 1: Chileno + Torres Mirador · Day 2: Los Cuernos · Day 3: Valle del Francés · Day 4: Grey Glacier · Day 5: Exit</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Torres Mirador — iconic sunrise viewpoint</div><span class="badge badge-teal">Must-do</span></div>
+      <div class="meta-row"><span class="meta">⏱ ~7–8 hrs return</span><span class="meta">📅 Day 1 of W Trek</span></div>
+    </div>
+    <div class="divider-label">Atacama Desert</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">El Tatio Geysers</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">⏰ <strong>4:30 AM departure</strong></span><span class="meta">📍 4,500 m altitude</span><span class="meta">🧥 Very cold at dawn</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Valle de la Luna</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">🌅 Best at sunset</span><span class="meta">📍 30 min from San Pedro</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Stargazing Tour</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">🔭 World's clearest night skies</span><span class="meta">📅 Evening</span></div>
+      <div class="tl-note">Booked via GetYourGuide. Milky Way visible to the naked eye.</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Laguna Cejar & Salt Flats</div><span class="badge badge-amber">Atacama</span></div>
+      <div class="meta-row"><span class="meta">🏊 High-salinity floating lagoon</span></div>
+    </div>
+    <div class="divider-label">Santiago</div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Cerro San Cristóbal & Bellavista</div><span class="badge badge-blue">Santiago</span></div>
+      <div class="meta-row"><span class="meta">🌆 City panorama + bohemian neighbourhood</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Mercado Central & La Vega</div><span class="badge badge-blue">Santiago</span></div>
+      <div class="meta-row"><span class="meta">🥗 Good vegetarian options at La Vega</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Barrio Italia & Lastarria</div><span class="badge badge-blue">Santiago</span></div>
+      <div class="meta-row"><span class="meta">🛍 Design, cafés, street art</span></div>
+    </div>
+  </div>
+
+  <!-- DAY BY DAY -->
+  <div class="section" id="days">
+    <p style="font-size:13px;color:#666;margin-bottom:1rem;">Click any day to expand the plan.</p>
+
+    <div class="divider-label" style="color:#0F6E56">🌿 Patagonia leg</div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">1</div><div class="day-title">Arrive Punta Arenas → Puerto Natales</div><div class="day-date">Day 1</div>
+      </div>
+      <div class="day-body open">
+        <span class="region-tag region-patagonia">PATAGONIA</span>
+        <ul class="timeline">
+          <li><span class="tl-time">Morning</span><span class="tl-label">JetSMART: SCL → PNT</span><p class="tl-note">~3.5 hrs. Arrive Punta Arenas.</p></li>
+          <li><span class="tl-time">Afternoon</span><span class="tl-label">Nomades shuttle: Punta Arenas → Puerto Natales</span><p class="tl-note">Itinerary #261245 · ~3 hrs</p></li>
+          <li><span class="tl-time">Evening</span><span class="tl-label">Check in: Hostel 53 Sur</span><p class="tl-note">Repack for W Trek. Leave everyday bag at hostel.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">2</div><div class="day-title">Puerto Natales — prep & explore</div><div class="day-date">Day 2</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">PATAGONIA</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Gear rental & final supplies</span><p class="tl-note">Stock vegetarian trail snacks.</p></li>
+          <li><span class="tl-label">Costanera waterfront walk</span></li>
+          <li><span class="tl-label">Early night — trek starts tomorrow</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">3</div><div class="day-title">W Trek Day 1 — Chileno + Torres Mirador</div><div class="day-date">Day 3</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">W TREK · DAY 1</span>
+        <ul class="timeline">
+          <li><span class="tl-time">Early morning</span><span class="tl-label">Bus to Las Torres trailhead</span></li>
+          <li><span class="tl-time">Morning</span><span class="tl-label">Hike to Refugio Chileno with full pack</span><p class="tl-note">Drop pack. Take Miniso daypack for mirador.</p></li>
+          <li><span class="tl-time">Afternoon</span><span class="tl-label">Mirador Las Torres</span><p class="tl-note">~2 hrs up. Steep at top. Worth every step.</p></li>
+          <li><span class="tl-time">Evening</span><span class="tl-label">Check in Refugio Chileno</span><p class="tl-note">Dinner included. Vegetarian confirmed. Charging available.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">4</div><div class="day-title">W Trek Day 2 — Chileno → Los Cuernos</div><div class="day-date">Day 4</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">W TREK · DAY 2</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Hike: Chileno → Los Cuernos</span><p class="tl-note">~11 km · exposed ridge · stunning Cuernos views</p></li>
+          <li><span class="tl-label">Night at Refugio Los Cuernos</span><p class="tl-note">Lakeside. Most scenic night on the trek.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">5</div><div class="day-title">W Trek Day 3 — Valle del Francés</div><div class="day-date">Day 5</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">W TREK · DAY 3</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Los Cuernos → Refugio Italiano (bag drop)</span></li>
+          <li><span class="tl-label">Valle del Francés hike</span><p class="tl-note">Hanging glaciers, condors, silence.</p></li>
+          <li><span class="tl-label">Continue to Paine Grande</span><p class="tl-note">Collect pack from Italiano. Start early.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">6</div><div class="day-title">W Trek Day 4 — Grey Glacier</div><div class="day-date">Day 6</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">W TREK · DAY 4</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Paine Grande → Grey Glacier</span><p class="tl-note">Hike or catamaran one-way.</p></li>
+          <li><span class="tl-label">Mirador Grey — blue iceberg views</span></li>
+          <li><span class="tl-label">Night at Refugio Grey</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">7</div><div class="day-title">W Trek Day 5 — Exit to Puerto Natales</div><div class="day-date">Day 7</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-patagonia">W TREK · DAY 5</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Return catamaran or hike out</span></li>
+          <li><span class="tl-label">Bus back to Puerto Natales</span></li>
+          <li><span class="tl-label">Hot shower · real meal · celebrate 🎉</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">8</div><div class="day-title">Puerto Natales → Punta Arenas → Santiago</div><div class="day-date">Day 8</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-transit">TRANSIT</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Transfer: Puerto Natales → Punta Arenas airport</span></li>
+          <li><span class="tl-label">JetSMART: PNT → SCL</span></li>
+          <li><span class="tl-label">Overnight Santiago or connect to Calama</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider-label" style="color:#854F0B;margin-top:1.5rem">🌵 Atacama leg</div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">9</div><div class="day-title">Fly to Calama → San Pedro de Atacama</div><div class="day-date">Day 9</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-atacama">ATACAMA</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Flight: SCL → Calama (CJC)</span><p class="tl-note">~2 hrs. Withdraw CLP at Calama ATM before leaving.</p></li>
+          <li><span class="tl-label">Transfer Pampa: Calama → San Pedro de Atacama</span><p class="tl-note">~1.5 hrs</p></li>
+          <li><span class="tl-label">Check in: Hostal Campo Base</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">10</div><div class="day-title">El Tatio Geysers</div><div class="day-date">Day 10</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-atacama">ATACAMA</span>
+        <ul class="timeline">
+          <li><span class="tl-time">4:00 AM</span><span class="tl-label">Wake up. Tour pickup.</span></li>
+          <li><span class="tl-time">4:30 AM</span><span class="tl-label">Depart for El Tatio</span><p class="tl-note">4,500 m altitude. Layers essential.</p></li>
+          <li><span class="tl-time">Dawn</span><span class="tl-label">Geyser fields at peak activity</span></li>
+          <li><span class="tl-time">Midday</span><span class="tl-label">Return to San Pedro. Rest.</span></li>
+          <li><span class="tl-time">Evening</span><span class="tl-label">Valle de la Luna — sunset</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">11</div><div class="day-title">Laguna Cejar + Stargazing</div><div class="day-date">Day 11</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-atacama">ATACAMA</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Laguna Cejar — salt flats & floating lagoon</span><p class="tl-note">Afternoon tour. Bring swimwear + towel.</p></li>
+          <li><span class="tl-label">Stargazing tour — evening</span><p class="tl-note">GetYourGuide booking. Milky Way visible to naked eye.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">12</div><div class="day-title">San Pedro → Calama → Santiago</div><div class="day-date">Day 12</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-transit">TRANSIT</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Transfer Pampa: San Pedro → Calama airport</span></li>
+          <li><span class="tl-label">Flight: CJC → SCL</span></li>
+          <li><span class="tl-label">Check in: Santiago hotel</span><p class="tl-note">Uber from SCL. Decompress evening.</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider-label" style="color:#185FA5;margin-top:1.5rem">🏙 Santiago leg</div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">13</div><div class="day-title">Santiago — Cerro San Cristóbal & Bellavista</div><div class="day-date">Day 13</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-santiago">SANTIAGO</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Cerro San Cristóbal — funicular up, walk down</span><p class="tl-note">Panoramic city views. Best on a clear morning.</p></li>
+          <li><span class="tl-label">Barrio Bellavista & Lastarria</span></li>
+          <li><span class="tl-label">La Vega market — vegetarian-friendly lunch</span></li>
+          <li><span class="tl-label">Barrio Italia — design, cafés, evening drinks</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num">14</div><div class="day-title">Santiago — last day & fly home</div><div class="day-date">Day 14</div>
+      </div>
+      <div class="day-body">
+        <span class="region-tag region-santiago">SANTIAGO</span>
+        <ul class="timeline">
+          <li><span class="tl-label">Morning free — Mercado Central, shopping</span></li>
+          <li><span class="tl-label">Check out & Uber to SCL</span></li>
+          <li><span class="tl-label">Flight: SCL → YYZ</span><p class="tl-note">~12–13 hrs. Home to Milton 🍁</p></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+  function toggleDay(header) {
+    header.nextElementSibling.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
